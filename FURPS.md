@@ -1,40 +1,67 @@
-FURPS Breakdown
+# FURPS – Aside
 
-Functionality
-Core Feature: Ephemeral, peer-to-peer chat with clipboard-based session invites.
-Built on: Waku protocol — decentralized messaging.
-Session model: One active session at a time. Messages sent only when both peers are online.
-No history, no account, no metadata — every launch is a reset.
-Constraints as features: No offline send/receive, no file transfer, no sync.
-Intentionally minimal — does one thing and does it quietly.
+A quiet breakdown of what defines the project.
 
-Usability
-UI: Monochrome, terminal-like, stripped to essentials.
-Onboarding: No onboarding. Paste or create invite = entry.
-Copy/Share model: Invite is shared manually via other messengers.
-Exit: One tap to erase all—immediate, irreversible.
-No buttons unless necessary: Radical simplicity is central to flow.
-Designed for those who value clarity, silence, and frictionless intent.
+---
 
-Reliability
-Depends on peer presence: Both devices must be online at the same time.
-No retries, no background delivery — it's live or it’s not.
-Waku stability is key: If the underlying protocol fails, message delivery fails.
-No recovery model: By design, no way to restore sessions or messages.
-Intentionally brittle to enforce ephemerality and presence.
+## 🔧 Functionality
 
-Performance
-Lightweight: Minimal UI, no media, no background sync = fast, small footprint.
-Startup: Always cold boot to a blank state.
-Resource use: Low battery/network impact unless active session is live.
-Feels instant because there’s almost nothing to load.
+- Ephemeral, peer-to-peer messaging over [Waku](https://waku.org)
+- One active session at a time
+- Clipboard-based invite sharing
+- No accounts, no contacts, no media, no sync
+- No offline storage, retry logic, or message history
+- Works only when both devices are online
 
-Supportability
-Open source: Fully transparent, forkable, inspectable.
-Tech stack: Android-first, Waku-powered, clipboard-based flows.
-No backend, no infra: No hosting, no user data to manage.
-Docs: Optional principles.md, possibly README on GitHub, no user manual by design.
-Debugging: Difficult by nature—logs are absence, not artifact.
-Built for those who understand what it is and need it
-Not built for users who need explanation.
- 
+→ Constraints are intentional and converted into features.
+
+---
+
+## 🎛 Usability
+
+- Minimal UI: black screen, monospaced feel, only essential actions
+- One-tap create or paste session
+- No onboarding, no profile setup
+- “Exit” button wipes local memory instantly
+- Message status: *Queued for sending* if peer is offline
+
+→ Designed for clarity, urgency, and zero onboarding friction.
+
+---
+
+## 🛡 Reliability
+
+- Depends on live peer presence via Waku
+- No persistence or delivery retry
+- No user state or session recovery
+- Works best in clear network conditions
+- If either peer exits, conversation ends
+
+→ Built to fail gracefully—and by design, forget.
+
+---
+
+## ⚡ Performance
+
+- Lightweight and fast
+- No background sync, push notifications, or media assets
+- Minimal memory and network usage
+- Cold boot by design
+
+→ Feels instant because it loads... almost nothing.
+
+---
+
+## 🔧 Supportability
+
+- Fully open-source and forkable
+- No backend, no database, no infra
+- Android APK (sideload only)
+- Built in public on top of Waku
+- `README`, `principles.md`, and this file serve as orientation
+
+→ Use it, modify it, fork it, or let it disappear.
+
+---
+
+If it disappears, it worked.
