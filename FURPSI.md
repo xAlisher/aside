@@ -34,7 +34,10 @@ A quiet breakdown of what defines the project.
 - Depends on live peer presence via Waku  
 - No persistence or retry  
 - No session recovery  
-- Works best in clean, direct network conditions  
+- Works best in clean, direct network conditions
+- Aside doesn’t verify identity. It relies on a shared response ritual, not a persistent login. A short session, confirmed through off-protocol timing and language, can be more secure than long-term accounts or biometrics.
+
+  
 
 → Built to fail gracefully — and by design, forget.
 
