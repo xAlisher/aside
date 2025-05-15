@@ -1,48 +1,37 @@
-# principles.md
+# Aside principles
 
-## Why Aside exists
-
-Aside is not a product. It’s an answer to the moment when someone says:
-**“I can’t say this here.”**
-
-It’s not a feature.
-It’s not a product-market fit.
-It’s a response—a quiet, permissionless exit gesture that doesn’t require approval.
-
-Most tools are designed to retain, monetize, and analyze.  
-Aside is designed to **disappear**.
+**Radically private**  
+**Radically minimal**  
+**Radically open**
 
 ---
 
-## What Aside believes
-
-- **Silence is a valid mode of communication.**  
-- **Privacy should not require explanation.**  
-- **Ephemerality is a feature, not a flaw.**  
-- **One message at the right time is more powerful than a thousand stored forever.**  
-- **We don’t need to replace mainstream apps. We need ways to step outside them.**
-
----
-
-## What Aside refuses
-
-- No accounts  
+### Radically private
+- True peer-to-peer  
+- No servers  
 - No history  
 - No logs  
-- No tracking  
-- No growth strategy  
-- No roadmap toward stickiness
+- No logo  
+- No app stores  
+- No notifications  
 
-This is not a safe space. It’s a **quiet one**.
+Privacy isn’t a feature. It’s the baseline.
 
 ---
 
-## Forks welcome
+### Radically minimal
+- It’s not what we add—it’s what we remove  
+- It’s not what it is—it’s what it isn’t  
+- Powered directly by protocol—no extra layers, no added complexity  
+- No onboarding. No growth loops.
 
-This is a baseline.  
-Build on it. Strip it down further.  
-Use it in the open, or keep it buried until you need it.
+Minimalism isn’t an aesthetic. It’s a language.
 
-If it disappears, it worked.
+---
 
-— *The Aside Project*
+### Radically open
+- Open thinking  
+- Open design  
+- Open code  
+
+This isn’t just open-source. It’s open-intent.
