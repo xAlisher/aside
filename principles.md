@@ -11,7 +11,7 @@
 - No servers  
 - No history  
 - No logs  
-- No logo  
+- No logos  
 - No app stores  
 - No notifications  
 
