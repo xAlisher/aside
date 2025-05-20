@@ -49,7 +49,11 @@ fun AsideScreen() {
                 .clickable {
                     val clipboard = context.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
                     val clip = clipboard.primaryClip
-                    val pasted = clip?.getItemAt(0)?.text?.toString() ?: "Clipboard is empty"
+                    val pasted = if (clip != null && clip.itemCount > 0) {
+                        clip.getItemAt(0).text?.toString()
+                    } else {
+                        "Clipboard is empty"
+                    }
                     Toast.makeText(context, "Pasted: $pasted", Toast.LENGTH_SHORT).show()
                 },
             contentAlignment = Alignment.Center // ✅ center it properly
