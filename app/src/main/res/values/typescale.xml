@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="font_display_md">24sp</dimen>
+    <dimen name="font_body_md">16sp</dimen>
+</resources>
