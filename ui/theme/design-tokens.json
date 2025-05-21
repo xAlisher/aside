@@ -1,0 +1,53 @@
+{
+  "$schema": "https://raw.githubusercontent.com/designtokens/tokens/main/schemas/latest/schema.json",
+
+  "color": {
+    "blackHole":      { "value": "#000000" },
+    "grayCharcoal":   { "value": "#171717" },
+    "grayGraphene":   { "value": "#1B1B1B" },
+    "grayShadow":     { "value": "#424242" },
+    "grayDust":       { "value": "#666666" },
+    "whitePure":      { "value": "#FFFFFF" },
+    "yellowCone":     { "value": "#FFCC00" },
+    "mustardPulse":   { "value": "#836000" },
+    "purplePrivate":  { "value": "#A532FF" },
+    "redAlarm":       { "value": "#D43437" }
+  },
+
+  "typography": {
+    "h1": {
+      "fontFamily":  { "value": "Roboto" },
+      "fontWeight":  { "value": 700 },
+      "fontSize":    { "value": 24, "type": "dimension" },
+      "lineHeight":  { "value": "auto" }
+    },
+
+    "main": {
+      "fontFamily":  { "value": "Roboto" },
+      "fontWeight":  { "value": 400 },
+      "fontSize":    { "value": 16, "type": "dimension" },
+      "lineHeight":  { "value": "auto" }
+    },
+
+    "message": {
+      "fontFamily":  { "value": "Roboto" },
+      "fontWeight":  { "value": 400 },
+      "fontSize":    { "value": 16, "type": "dimension" },
+      "lineHeight":  { "value": "auto" }
+    },
+
+    "toast": {
+      "fontFamily":  { "value": "Roboto" },
+      "fontWeight":  { "value": 400 },
+      "fontSize":    { "value": 14, "type": "dimension" },
+      "lineHeight":  { "value": "auto" }
+    },
+
+    "tag": {
+      "fontFamily":  { "value": "Roboto" },
+      "fontWeight":  { "value": 400 },
+      "fontSize":    { "value": 12, "type": "dimension" },
+      "lineHeight":  { "value": "auto" }
+    }
+  }
+}
