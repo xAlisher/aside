@@ -10,10 +10,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import com.alisher.aside.ui.theme.AsideTheme
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.draw.clip
 import androidx.compose.foundation.layout.WindowInsets
@@ -27,7 +26,7 @@ fun AsideScreen() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.Black)
+            .background(AsideTheme.colors.blackHole)
             .padding(24.dp)
             .windowInsetsPadding(WindowInsets.systemBars), // ⬅ optional to avoid overlap
         verticalArrangement = Arrangement.Bottom,
@@ -35,8 +34,8 @@ fun AsideScreen() {
     ) {
         Text(
             text = "Let’s step aside",
-            color = Color.White,
-            fontSize = 24.sp,
+            color = AsideTheme.colors.whitePure,
+            style = AsideTheme.typography.headlineMedium,
             modifier = Modifier.padding(bottom = 32.dp)
         )
 
@@ -45,7 +44,7 @@ fun AsideScreen() {
                 .fillMaxWidth()
                 .height(56.dp)
                 .clip(RoundedCornerShape(4.dp))
-                .background(Color(0xFF212121))
+                .background(AsideTheme.colors.grayGraphene)
                 .clickable {
                     val clipboard = context.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
                     val clip = clipboard.primaryClip
@@ -58,7 +57,11 @@ fun AsideScreen() {
                 },
             contentAlignment = Alignment.Center // ✅ center it properly
         ) {
-            Text(text = "⎘ Paste", color = Color.White, fontSize = 16.sp)
+            Text(
+                text = "⎘ Paste",
+                color = AsideTheme.colors.whitePure,
+                style = AsideTheme.typography.bodyLarge
+            )
         }
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -68,13 +71,17 @@ fun AsideScreen() {
                 .fillMaxWidth()
                 .height(56.dp)
                 .clip(RoundedCornerShape(4.dp))
-                .background(Color(0xFF212121))
+                .background(AsideTheme.colors.grayGraphene)
                 .clickable {
                     Toast.makeText(context, "Create tapped", Toast.LENGTH_SHORT).show()
                 },
             contentAlignment = Alignment.Center
         ) {
-            Text(text = "+ Create", color = Color.White, fontSize = 16.sp)
+            Text(
+                text = "+ Create",
+                color = AsideTheme.colors.whitePure,
+                style = AsideTheme.typography.bodyLarge
+            )
         }
 
     }

@@ -1,75 +1,61 @@
 package com.alisher.aside.ui.theme
 
-import android.app.Activity
-import android.os.Build
-import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material3.*
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Typography
+import androidx.compose.material3.darkColorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.ReadOnlyComposable
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.toArgb
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalView
-import androidx.core.view.WindowCompat
 
-private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80,
-    background = Color.Black,
-    surface = Color.Black,
-    onPrimary = Color.White,
-    onSecondary = Color.White,
-    onTertiary = Color.White,
-    onBackground = Color.White,
-    onSurface = Color.White,
+private val AsideColorScheme = darkColorScheme(
+    background = BlackHole,
+    surface = GrayGraphene,
+    primary = PurplePrivate,
+    secondary = YellowCone,
+    tertiary = RedAlarm,
+    onPrimary = WhitePure,
+    onSecondary = BlackHole,
+    onTertiary = WhitePure,
+    onBackground = WhitePure,
+    onSurface = WhitePure
 )
 
-private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40,
-    background = Color.White,
-    surface = Color.White,
-    onPrimary = Color.Black,
-    onSecondary = Color.Black,
-    onTertiary = Color.Black,
-    onBackground = Color.Black,
-    onSurface = Color.Black,
+data class AsideColors(
+    val blackHole: Color = BlackHole,
+    val grayCharcoal: Color = GrayCharcoal,
+    val grayGraphene: Color = GrayGraphene,
+    val grayShadow: Color = GrayShadow,
+    val grayDust: Color = GrayDust,
+    val whitePure: Color = WhitePure,
+    val yellowCone: Color = YellowCone,
+    val mustardPulse: Color = MustardPulse,
+    val purplePrivate: Color = PurplePrivate,
+    val redAlarm: Color = RedAlarm
 )
+
+private val LocalAsideColors = staticCompositionLocalOf { AsideColors() }
+
+object AsideTheme {
+    val colors: AsideColors
+        @Composable
+        @ReadOnlyComposable
+        get() = LocalAsideColors.current
+
+    val typography: Typography
+        @Composable
+        @ReadOnlyComposable
+        get() = AsideTypography
+}
 
 @Composable
-fun AsideTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
-    dynamicColor: Boolean = true,
-    content: @Composable () -> Unit
-) {
-    val context = LocalContext.current
-    val colorScheme = when {
-        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
-        }
-
-        darkTheme -> DarkColorScheme
-        else -> LightColorScheme
+fun AsideTheme(content: @Composable () -> Unit) {
+    CompositionLocalProvider(LocalAsideColors provides AsideColors()) {
+        MaterialTheme(
+            colorScheme = AsideColorScheme,
+            typography = AsideTypography,
+            content = content
+        )
     }
-
-    val view = LocalView.current
-    if (!view.isInEditMode) {
-        SideEffect {
-            val window = (view.context as Activity).window
-            WindowCompat.setDecorFitsSystemWindows(window, false)
-            WindowCompat.getInsetsController(window, view).apply {
-                isAppearanceLightStatusBars = false
-            }
-            @Suppress("DEPRECATION")
-            window.statusBarColor = android.graphics.Color.TRANSPARENT
-        }
-    }
-
-    MaterialTheme(
-        colorScheme = colorScheme,
-        typography = Typography,
-        content = content
-    )
 }
