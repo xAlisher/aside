@@ -1,0 +1,18 @@
+{
+  "colors": {
+    "BlackHole": "#000000",
+    "GrayCharcoal": "#171717",
+    "GrayGraphene": "#1B1B1B",
+    "GrayShadow": "#424242",
+    "GrayDust": "#666666",
+    "WhitePure": "#FFFFFF",
+    "YellowCone": "#FFCC00",
+    "MustardPulse": "#836000",
+    "PurplePrivate": "#A532FF",
+    "RedAlarm": "#D43437"
+  },
+  "typography": {
+    "displayMd": { "fontSize": 24 },
+    "bodyMd": { "fontSize": 16 }
+  }
+}
