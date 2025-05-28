@@ -5,100 +5,112 @@ import androidx.compose.animation.core.FastOutLinearInEasing
 import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.alisher.aside.ui.theme.AsideTheme
-import com.alisher.aside.ui.theme.ConnectionStatusHeight
-import com.alisher.aside.ui.theme.ConnectionStatusMarginEnd
-import com.alisher.aside.ui.theme.ConnectionStatusPaddingVertical
-import com.alisher.aside.ui.theme.ConnectionStatusWidth
+import com.alisher.aside.ui.theme.*
 import kotlinx.coroutines.delay
 
+/* ---------- public state enum ---------- */
 enum class PeerState { Offline, Connecting, Connected, Exited }
 
-
+/* ---------- component ---------- */
 @Composable
-fun ConnectionStatus(status: PeerState, modifier: Modifier = Modifier) {
-    val normalColor = when (status) {
-        PeerState.Offline -> AsideTheme.colors.grayShadow
+fun ConnectionStatus(
+    status: PeerState,
+    modifier: Modifier = Modifier
+) {
+    /* colours ------------------------------------------------------------ */
+    val baseDot: Color = when (status) {
+        PeerState.Offline    -> AsideTheme.colors.grayShadow
         PeerState.Connecting -> AsideTheme.colors.yellowCone
-        PeerState.Connected -> AsideTheme.colors.purplePrivate
-        PeerState.Exited -> AsideTheme.colors.redAlarm
+        PeerState.Connected  -> AsideTheme.colors.purplePrivate
+        PeerState.Exited     -> AsideTheme.colors.redAlarm
     }
-    val dimColor = when (status) {
-        PeerState.Offline -> AsideTheme.colors.grayDust
+    val dimDot: Color = when (status) {
+        PeerState.Offline    -> AsideTheme.colors.grayDust
         PeerState.Connecting -> AsideTheme.colors.mustardPulse
-        else -> normalColor
+        else                 -> baseDot               // connected / exited stay solid
     }
-    val textColor = when (status) {
-        PeerState.Connecting -> AsideTheme.colors.blackHole
-        else -> AsideTheme.colors.whitePure
-    }
-    val color = remember { Animatable(normalColor) }
+    val textCol: Color = baseDot                      // ⬅️ label uses same colour as dot
+
+    /* single Animatable alpha drives dot *and* label -------------------- */
+    val alpha = remember { Animatable(1f) }
 
     LaunchedEffect(status) {
-        color.snapTo(normalColor)
+        alpha.snapTo(1f)
         if (status == PeerState.Offline || status == PeerState.Connecting) {
             while (true) {
-                delay(800)
-                color.animateTo(dimColor, animationSpec = tween(500, easing = FastOutLinearInEasing))
-                delay(1500)
-                color.animateTo(normalColor, animationSpec = tween(300, easing = LinearOutSlowInEasing))
+                delay(2000)                                      // ← bright ON 2 s
+                alpha.animateTo(
+                    0.4f,
+                    tween(1000, easing = FastOutLinearInEasing)  // fade-out 1 s
+                )
+                delay(400)                                       // optional dim hold
+                alpha.animateTo(
+                    1f,
+                    tween(600,  easing = LinearOutSlowInEasing)  // fade-in 0.6 s
+                )
             }
         }
     }
 
-    Box(
+    /* UI ---------------------------------------------------------------- */
+    Row(
         modifier = modifier
-            .padding(
-                top = ConnectionStatusPaddingVertical,
-                bottom = ConnectionStatusPaddingVertical,
-                end = ConnectionStatusMarginEnd
-            )
             .size(ConnectionStatusWidth, ConnectionStatusHeight)
-            .clip(RoundedCornerShape(4.dp))
-            .background(color.value),
-        contentAlignment = Alignment.Center
+            .padding(
+                start  = 20.dp,                         // fixed 20-px gap before the dot
+                top    = ConnectionStatusPaddingVertical,
+                bottom = ConnectionStatusPaddingVertical
+            ),
+        verticalAlignment = Alignment.CenterVertically
     ) {
+        /* coloured status dot */
+        Box(
+            Modifier
+                .size(12.dp)
+                .clip(CircleShape)
+                .alpha(alpha.value)
+                .background(baseDot.copy(alpha = alpha.value))
+        )
+
+        Spacer(Modifier.width(12.dp))
+
+        /* label --------------------------------------------------------- */
         Text(
-            text = when (status) {
-                PeerState.Offline -> "Peer is offline"
+            text  = when (status) {
+                PeerState.Offline    -> "Peer is offline"
                 PeerState.Connecting -> "Connecting…"
-                PeerState.Connected -> "Peer connected"
-                PeerState.Exited -> "Peer exited"
+                PeerState.Connected  -> "Peer connected"
+                PeerState.Exited     -> "Peer exited"
             },
-            color = textColor,
+            color = textCol.copy(alpha = alpha.value),
             style = AsideTheme.typography.labelSmall
         )
     }
 }
 
-@Preview(showBackground = true)
+/* ---------- design-time preview ---------- */
+@Preview(showBackground = true, backgroundColor = 0xFF202020)
 @Composable
 fun ConnectionStatusPreview() {
     AsideTheme {
         Column {
             ConnectionStatus(PeerState.Offline)
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(Modifier.height(12.dp))
             ConnectionStatus(PeerState.Connecting)
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(Modifier.height(12.dp))
             ConnectionStatus(PeerState.Connected)
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(Modifier.height(12.dp))
             ConnectionStatus(PeerState.Exited)
         }
     }

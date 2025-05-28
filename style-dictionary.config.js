@@ -1,4 +1,4 @@
-module.exports = {
+ConnectionStatusmodule.exports = {
   source: ['ui/theme/design-tokens.json'],
   platforms: {
     android: {
