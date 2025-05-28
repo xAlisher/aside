@@ -8,6 +8,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
 private val AsideColorScheme = darkColorScheme(
     background = BlackHole,
@@ -59,3 +60,8 @@ fun AsideTheme(content: @Composable () -> Unit) {
         )
     }
 }
+
+val ConnectionStatusHeight = 32.dp
+val ConnectionStatusWidth = 160.dp
+val ConnectionStatusMarginEnd = 20.dp
+val ConnectionStatusPaddingVertical = 8.dp
