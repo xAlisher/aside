@@ -9,6 +9,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.alisher.aside.ui.theme.AsideTheme
 
+/**
+ * Top‑bar shown during an active session.
+ * Left  → live peer/connection status.
+ * Right → Exit action.
+ */
 @Composable
 fun SessionTopBar(
     peerState: PeerState,
@@ -18,12 +23,17 @@ fun SessionTopBar(
         modifier = Modifier
             .fillMaxWidth()
             .height(48.dp)
-            .background(AsideTheme.colors.blackHole)
-            .padding(horizontal = 20.dp, vertical = 8.dp),
+            .background(Color.Black),
         verticalAlignment = Alignment.CenterVertically
     ) {
+        // left padding 20 dp as per spec lives inside the status component
         ConnectionStatus(peerState)
-        Spacer(modifier = Modifier.weight(1f))
-        ExitButton(onExit)
+
+        Spacer(Modifier.weight(1f))
+
+        // 20‑dp trailing padding to mirror the leading padding
+        Row(Modifier.padding(end = 20.dp)) {
+            ExitButton(onExit)
+        }
     }
 }

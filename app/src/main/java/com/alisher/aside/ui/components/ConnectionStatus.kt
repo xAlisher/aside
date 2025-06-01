@@ -94,7 +94,8 @@ fun ConnectionStatus(
                 PeerState.Exited     -> "Peer exited"
             },
             color = textCol.copy(alpha = alpha.value),
-            style = AsideTheme.typography.labelSmall
+            style = AsideTheme.typography.bodyLarge        // 16 sp Body
+
         )
     }
 }

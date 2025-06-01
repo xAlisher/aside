@@ -14,12 +14,12 @@ import com.alisher.aside.ui.theme.AsideTheme
 @Composable
 fun ExitButton(onClick: () -> Unit) {
     Box(
-        contentAlignment = Alignment.Center,
+        contentAlignment = Alignment.CenterEnd,
         modifier = Modifier
             .sizeIn(minWidth = 48.dp, minHeight = 48.dp)
-            .clickable { onClick() }
-            .padding(horizontal = 16.dp, vertical = 8.dp)
-    ) {
+            .clickable { onClick() }   // ≥48 dp touch area
+    )
+            {
         Text(
             text = "Exit",
             style = AsideTheme.typography.bodyLarge,
