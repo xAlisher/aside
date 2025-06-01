@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.alisher.aside.ui.theme.AsideTheme
+import com.alisher.aside.R
 import com.alisher.aside.ui.theme.GrayCharcoal
 
 enum class ButtonType { Send, Queue }
@@ -30,7 +31,7 @@ fun SendQueueButton(
     val backgroundColor = when (state) {
         ButtonState.Default -> AsideTheme.colors.grayGraphene
         ButtonState.Pressed -> GrayCharcoal
-        ButtonState.Disabled -> AsideTheme.colors.grayShadow
+        ButtonState.Disabled -> AsideTheme.colors.grayGraphene
     }
 
     val iconRes = when (type) {
