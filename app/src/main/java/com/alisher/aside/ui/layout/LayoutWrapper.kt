@@ -6,8 +6,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.foundation.layout.systemBars
 
-/** Simple wrapper applying safe drawing insets. */
+
+/** Simple wrapper applying safe system bar insets. */
 @Composable
 fun LayoutWrapper(
     modifier: Modifier = Modifier,
@@ -16,7 +18,7 @@ fun LayoutWrapper(
     Box(
         modifier
             .fillMaxSize()
-            .windowInsetsPadding(WindowInsets.safeDrawing)
+            .windowInsetsPadding(WindowInsets.systemBars)
     ) {
         content()
     }

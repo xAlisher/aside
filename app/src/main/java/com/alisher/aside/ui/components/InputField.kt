@@ -13,13 +13,15 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
-import androidx.compose.foundation.layout.windowInsetsPadding
-import androidx.compose.foundation.layout.WindowInsets
 import com.alisher.aside.ui.theme.AsideTheme
+
+/* inset helpers */
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.imePadding
+import androidx.compose.foundation.layout.navigationBarsPadding
 
 @Composable
 fun InputField(
@@ -28,61 +30,66 @@ fun InputField(
     buttonType: ButtonType = ButtonType.Send,
     modifier: Modifier = Modifier
 ) {
-    val keyboardController = LocalSoftwareKeyboardController.current
-    val focusRequester = remember { FocusRequester() }
-    val focusManager = LocalFocusManager.current
+    val keyboard   = LocalSoftwareKeyboardController.current
+    val requester  = remember { FocusRequester() }
+    val focusMgr   = LocalFocusManager.current
 
     LaunchedEffect(Unit) {
-        focusRequester.requestFocus()
-        keyboardController?.show()
+        requester.requestFocus()
+        keyboard?.show()
     }
 
     Row(
         modifier = modifier
             .background(AsideTheme.colors.blackHole)
-            .windowInsetsPadding(WindowInsets.ime.union(WindowInsets.navigationBars))
+            // nav-bar inset first (old 3-button mode)
+            .navigationBarsPadding()
+            // IME inset second (keyboard + suggestion strip)
+            .imePadding()
+            // tiny safety pad for OEM quirks
+            .padding(bottom = 8.dp)
             .padding(horizontal = 16.dp)
             .heightIn(min = 48.dp),
         verticalAlignment = Alignment.Bottom
     ) {
-        var internalValue by rememberSaveable(stateSaver = TextFieldValue.Saver) {
+        var internal by rememberSaveable(stateSaver = TextFieldValue.Saver) {
             mutableStateOf(TextFieldValue(text))
         }
 
         LaunchedEffect(text) {
-            if (text != internalValue.text) {
-                internalValue = TextFieldValue(text)
-            }
+            if (text != internal.text) internal = TextFieldValue(text)
         }
 
         BasicTextField(
-            value = internalValue,
+            value = internal,
             onValueChange = {
-                internalValue = it
+                internal = it
                 onValueChange(it.text)
             },
             modifier = Modifier
                 .weight(1f)
-                .focusRequester(focusRequester)
+                .focusRequester(requester)
                 .align(Alignment.Top),
             textStyle = AsideTheme.typography.bodyMedium.copy(
                 color = AsideTheme.colors.whitePure
             ),
-            keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Default),
-            keyboardActions = KeyboardActions(onDone = { focusManager.clearFocus() }),
-            singleLine = false
+            keyboardOptions  = KeyboardOptions.Default.copy(imeAction = ImeAction.Default),
+            keyboardActions  = KeyboardActions(onDone = { focusMgr.clearFocus() }),
+            singleLine       = false
         )
 
         Spacer(Modifier.width(16.dp))
 
-        val buttonState = if (internalValue.text.isEmpty()) ButtonState.Disabled else ButtonState.Default
+        val btnState =
+            if (internal.text.isEmpty()) ButtonState.Disabled else ButtonState.Default
+
         SendQueueButton(
-            type = buttonType,
-            state = buttonState,
+            type  = buttonType,
+            state = btnState,
             onClick = {
-                keyboardController?.hide()
+                keyboard?.hide()
                 onValueChange("")
-                internalValue = TextFieldValue("")
+                internal = TextFieldValue("")
             },
             modifier = Modifier.align(Alignment.Bottom)
         )

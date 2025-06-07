@@ -1,42 +1,32 @@
-    package com.alisher.aside.ui.components
+package com.alisher.aside.ui.components
 
-    import androidx.compose.foundation.background
-    import androidx.compose.foundation.layout.*
-    import androidx.compose.runtime.*
-    import androidx.compose.ui.Modifier
-    import com.alisher.aside.ui.layout.LayoutWrapper
-    import com.alisher.aside.ui.theme.AsideTheme
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.windowInsetsPadding
+import androidx.compose.foundation.layout.navigationBars
+import androidx.compose.foundation.layout.ime
+import androidx.compose.material3.Scaffold
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 
-    @Composable
-    fun ChatScreen(
-        peerState: PeerState,
-        onExit: () -> Unit,
-        modifier: Modifier = Modifier
-    ) {
-        var input by remember { mutableStateOf("") }
-
-        LayoutWrapper(modifier = modifier.background(AsideTheme.colors.blackHole)) {
-            Column(
-                modifier = Modifier.fillMaxSize()
-            ) {
-                SessionTopBar(peerState = peerState, onExit = onExit)
-
-                Box(modifier = Modifier.weight(1f)) {
-                    // TODO: Replace with LazyColumn for chat messages
-                }
-
-            val buttonType = if (peerState == PeerState.Connected) {
-                ButtonType.Send
-            } else {
-                ButtonType.Queue
-            }
-
-                InputField(
-                    text = input,
-                    onValueChange = { input = it },
-                    buttonType = buttonType,
-                    modifier = Modifier.fillMaxWidth()
-                )
-            }
+@Composable
+fun ChatScreen(
+    peerState: PeerState,
+    draft: String,
+    onDraftChange: (String) -> Unit,
+    onExit: () -> Unit
+) {
+    Scaffold(
+        topBar = { SessionTopBar(peerState, onExit) },
+        bottomBar = {
+            InputField(
+                text          = draft,
+                onValueChange = onDraftChange,
+                modifier      = Modifier
+                    // clears navigation-bar height (3-button mode)
+                    .windowInsetsPadding(WindowInsets.navigationBars)
+                    // clears keyboard + suggestion strip
+                    .windowInsetsPadding(WindowInsets.ime)
+            )
         }
-    }
+    ) { /* messages go here later */ }
+}
