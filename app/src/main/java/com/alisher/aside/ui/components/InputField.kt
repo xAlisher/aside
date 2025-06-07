@@ -17,9 +17,8 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.ime
-import androidx.compose.foundation.layout.asPaddingValues
 import com.alisher.aside.ui.theme.AsideTheme
 
 @Composable
@@ -41,8 +40,8 @@ fun InputField(
     Row(
         modifier = modifier
             .background(AsideTheme.colors.blackHole)
+            .windowInsetsPadding(WindowInsets.ime.union(WindowInsets.navigationBars))
             .padding(horizontal = 16.dp)
-            .padding(bottom = WindowInsets.ime.asPaddingValues().calculateBottomPadding())
             .heightIn(min = 48.dp),
         verticalAlignment = Alignment.Bottom
     ) {
