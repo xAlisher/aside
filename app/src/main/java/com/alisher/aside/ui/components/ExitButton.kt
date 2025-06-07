@@ -12,14 +12,16 @@ import androidx.compose.material3.Text
 import com.alisher.aside.ui.theme.AsideTheme
 
 @Composable
-fun ExitButton(onClick: () -> Unit) {
+fun ExitButton(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
     Box(
         contentAlignment = Alignment.CenterEnd,
-        modifier = Modifier
+        modifier = modifier
             .sizeIn(minWidth = 48.dp, minHeight = 48.dp)
             .clickable { onClick() }   // ≥48 dp touch area
-    )
-            {
+    ) {
         Text(
             text = "Exit",
             style = AsideTheme.typography.bodyLarge,
