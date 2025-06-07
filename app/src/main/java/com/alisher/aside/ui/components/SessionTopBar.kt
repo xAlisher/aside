@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.alignByBaseline
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.alisher.aside.ui.theme.AsideTheme
@@ -29,13 +30,13 @@ fun SessionTopBar(
         verticalAlignment = Alignment.CenterVertically
     ) {
         // left padding 20 dp as per spec lives inside the status component
-        ConnectionStatus(peerState)
+        ConnectionStatus(peerState, modifier = Modifier.alignByBaseline())
 
         Spacer(Modifier.weight(1f))
 
         // 20‑dp trailing padding to mirror the leading padding
         Row(Modifier.padding(end = 20.dp)) {
-            ExitButton(onExit)
+            ExitButton(onExit, modifier = Modifier.alignByBaseline())
         }
     }
 }
