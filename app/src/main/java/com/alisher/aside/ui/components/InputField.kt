@@ -100,7 +100,6 @@ fun InputField(
                 type  = buttonType,
                 state = btnState,
                 onClick = {
-                    keyboard?.hide()
                     onValueChange("")
                     internal = TextFieldValue("")
                 },
