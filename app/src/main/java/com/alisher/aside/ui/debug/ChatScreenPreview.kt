@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -19,24 +18,12 @@ import com.alisher.aside.ui.theme.AsideTheme
 @Composable
 fun ChatScreenPreview() {
     AsideTheme {
-        val messages = remember {
-            mutableStateListOf(
-                ChatMessage(MessageType.In, "Hey, you there?"),
-                ChatMessage(MessageType.Out, "Always", MessageStatus.Delivered),
-                ChatMessage(MessageType.In, "Good to know")
-            )
-        }
         val online = remember { mutableStateOf(true) }
 
         Column(Modifier.fillMaxSize()) {
             ChatScreen(
-                messages = messages,
                 peerState = if (online.value) PeerState.Connected else PeerState.Offline,
-                onSendMessage = { text ->
-                    val status = if (online.value) MessageStatus.Sent else MessageStatus.Queued
-                    messages.add(ChatMessage(MessageType.Out, text, status))
-                },
-                onExit = { messages.clear() }
+                onExit = { }
             )
 
             Row(Modifier.padding(16.dp), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
