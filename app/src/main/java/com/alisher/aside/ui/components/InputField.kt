@@ -2,7 +2,6 @@ package com.alisher.aside.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.layout.navigationBarsWithImePadding
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -18,6 +17,9 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.ime
+import androidx.compose.foundation.layout.asPaddingValues
 import com.alisher.aside.ui.theme.AsideTheme
 
 @Composable
@@ -40,8 +42,8 @@ fun InputField(
         modifier = modifier
             .background(AsideTheme.colors.blackHole)
             .padding(horizontal = 16.dp)
-            .heightIn(min = 48.dp)
-            .navigationBarsWithImePadding(),
+            .padding(bottom = WindowInsets.ime.asPaddingValues().calculateBottomPadding())
+            .heightIn(min = 48.dp),
         verticalAlignment = Alignment.Bottom
     ) {
         var internalValue by rememberSaveable(stateSaver = TextFieldValue.Saver) {
