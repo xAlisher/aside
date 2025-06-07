@@ -94,9 +94,10 @@ fun ConnectionStatus(
                 PeerState.Exited     -> "Peer exited"
             },
             color = textCol.copy(alpha = alpha.value),
-            style = AsideTheme.typography.bodyLarge        // 16 sp Body
-
+            style = AsideTheme.typography.bodyLarge,
+            modifier = Modifier.offset(y = (-2).dp) // ← 👈 just this
         )
+
     }
 }
 
