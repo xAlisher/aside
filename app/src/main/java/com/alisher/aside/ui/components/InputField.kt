@@ -58,8 +58,8 @@ fun InputField(
         Row(
             modifier = Modifier
                 .padding(top = 16.dp)
-                // tiny safety pad for OEM quirks
-                .padding(bottom = 8.dp)
+                // safety pad for OEM quirks
+                .padding(bottom = 16.dp)
                 .padding(horizontal = 16.dp)
                 .heightIn(min = 48.dp),
             verticalAlignment = Alignment.Bottom
