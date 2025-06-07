@@ -56,54 +56,55 @@ fun InputField(
 
         Row(
             modifier = Modifier
+                .padding(top = 16.dp)
                 // tiny safety pad for OEM quirks
                 .padding(bottom = 8.dp)
                 .padding(horizontal = 16.dp)
                 .heightIn(min = 48.dp),
             verticalAlignment = Alignment.Bottom
         ) {
-        var internal by rememberSaveable(stateSaver = TextFieldValue.Saver) {
-            mutableStateOf(TextFieldValue(text))
+            var internal by rememberSaveable(stateSaver = TextFieldValue.Saver) {
+                mutableStateOf(TextFieldValue(text))
+            }
+
+            LaunchedEffect(text) {
+                if (text != internal.text) internal = TextFieldValue(text)
+            }
+
+            BasicTextField(
+                value = internal,
+                onValueChange = {
+                    internal = it
+                    onValueChange(it.text)
+                },
+                modifier = Modifier
+                    .weight(1f)
+                    .focusRequester(requester)
+                    .align(Alignment.Top),
+                textStyle = AsideTheme.typography.bodyMedium.copy(
+                    color = AsideTheme.colors.whitePure
+                ),
+                keyboardOptions  = KeyboardOptions.Default.copy(imeAction = ImeAction.Default),
+                keyboardActions  = KeyboardActions(onDone = { focusMgr.clearFocus() }),
+                singleLine       = false
+            )
+
+            Spacer(Modifier.width(16.dp))
+
+            val btnState =
+                if (internal.text.isEmpty()) ButtonState.Disabled else ButtonState.Default
+
+            SendQueueButton(
+                type  = buttonType,
+                state = btnState,
+                onClick = {
+                    keyboard?.hide()
+                    onValueChange("")
+                    internal = TextFieldValue("")
+                },
+                modifier = Modifier.align(Alignment.Bottom)
+            )
         }
-
-        LaunchedEffect(text) {
-            if (text != internal.text) internal = TextFieldValue(text)
-        }
-
-        BasicTextField(
-            value = internal,
-            onValueChange = {
-                internal = it
-                onValueChange(it.text)
-            },
-            modifier = Modifier
-                .weight(1f)
-                .focusRequester(requester)
-                .align(Alignment.Top),
-            textStyle = AsideTheme.typography.bodyMedium.copy(
-                color = AsideTheme.colors.whitePure
-            ),
-            keyboardOptions  = KeyboardOptions.Default.copy(imeAction = ImeAction.Default),
-            keyboardActions  = KeyboardActions(onDone = { focusMgr.clearFocus() }),
-            singleLine       = false
-        )
-
-        Spacer(Modifier.width(16.dp))
-
-        val btnState =
-            if (internal.text.isEmpty()) ButtonState.Disabled else ButtonState.Default
-
-        SendQueueButton(
-            type  = buttonType,
-            state = btnState,
-            onClick = {
-                keyboard?.hide()
-                onValueChange("")
-                internal = TextFieldValue("")
-            },
-            modifier = Modifier.align(Alignment.Bottom)
-        )
     }
-}
 
 }
