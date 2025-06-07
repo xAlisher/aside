@@ -20,7 +20,9 @@ import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.layout.systemBars
 
 @Composable
-fun AsideScreen() {
+fun AsideScreen(
+    onCreate: () -> Unit,
+) {
     val context = LocalContext.current
 
     Column(
@@ -72,9 +74,7 @@ fun AsideScreen() {
                 .height(56.dp)
                 .clip(RoundedCornerShape(4.dp))
                 .background(AsideTheme.colors.grayGraphene)
-                .clickable {
-                    Toast.makeText(context, "Create tapped", Toast.LENGTH_SHORT).show()
-                },
+                .clickable { onCreate() },
             contentAlignment = Alignment.Center
         ) {
             Text(

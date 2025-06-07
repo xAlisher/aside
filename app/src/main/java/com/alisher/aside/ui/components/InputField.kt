@@ -23,6 +23,7 @@ import com.alisher.aside.ui.theme.AsideTheme
 fun InputField(
     text: String,
     onValueChange: (String) -> Unit,
+    buttonType: ButtonType = ButtonType.Send,
     modifier: Modifier = Modifier
 ) {
     val keyboardController = LocalSoftwareKeyboardController.current
@@ -73,7 +74,7 @@ fun InputField(
 
         val buttonState = if (internalValue.text.isEmpty()) ButtonState.Disabled else ButtonState.Default
         SendQueueButton(
-            type = ButtonType.Send,
+            type = buttonType,
             state = buttonState,
             onClick = {
                 keyboardController?.hide()

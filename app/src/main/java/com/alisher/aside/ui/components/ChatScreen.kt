@@ -29,9 +29,16 @@ fun ChatScreen(
             // TODO: Replace with LazyColumn for chat messages
         }
 
+        val buttonType = if (peerState == PeerState.Connected) {
+            ButtonType.Send
+        } else {
+            ButtonType.Queue
+        }
+
         InputField(
             text = input,
             onValueChange = { input = it },
+            buttonType = buttonType,
             modifier = Modifier
                 .fillMaxWidth()
                 .windowInsetsPadding(WindowInsets.navigationBars)
