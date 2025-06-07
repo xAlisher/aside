@@ -3,7 +3,7 @@ package com.alisher.aside.ui.debug
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
-import android.widget.Toast
+import com.alisher.aside.util.showTopToast
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.Divider
@@ -47,13 +47,13 @@ fun SessionTestScreen(viewModel: SessionViewModel = viewModel()) {
                 val fakeInvite = "Let’s step aside: ${System.currentTimeMillis().toString(16)}"
                 val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
                 clipboard.setPrimaryClip(ClipData.newPlainText("invite", fakeInvite))
-                Toast.makeText(context, "Invite copied to clipboard. Send it to your peer.", Toast.LENGTH_SHORT).show()
+                showTopToast(context, "Invite copied to clipboard. Send it to your peer.")
             }) {
                 Text("Start Session")
             }
             Button(modifier = Modifier.fillMaxWidth(), onClick = {
                 viewModel.exitSession()
-                Toast.makeText(context, "Nothing here", Toast.LENGTH_SHORT).show()
+                showTopToast(context, "Nothing here")
             }) {
                 Text("Exit Session")
             }

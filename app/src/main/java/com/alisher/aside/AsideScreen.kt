@@ -2,7 +2,7 @@ package com.alisher.aside
 
 import android.content.ClipboardManager
 import android.content.Context.CLIPBOARD_SERVICE
-import android.widget.Toast
+import com.alisher.aside.util.showTopToast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -55,7 +55,7 @@ fun AsideScreen(
                     } else {
                         "Clipboard is empty"
                     }
-                    Toast.makeText(context, "Pasted: $pasted", Toast.LENGTH_SHORT).show()
+                    showTopToast(context, "Pasted: $pasted")
                 },
             contentAlignment = Alignment.Center // ✅ center it properly
         ) {
