@@ -17,6 +17,7 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.graphics.SolidColor
 import com.alisher.aside.ui.theme.AsideTheme
 
 /* inset helpers */
@@ -84,6 +85,7 @@ fun InputField(
                 textStyle = AsideTheme.typography.bodyMedium.copy(
                     color = AsideTheme.colors.whitePure
                 ),
+                cursorBrush    = SolidColor(AsideTheme.colors.whitePure),
                 keyboardOptions  = KeyboardOptions.Default.copy(imeAction = ImeAction.Default),
                 keyboardActions  = KeyboardActions(onDone = { focusMgr.clearFocus() }),
                 singleLine       = false
