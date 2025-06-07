@@ -14,7 +14,7 @@ class AsideScreenTest {
     fun mainButtonsAreDisplayed() {
         composeTestRule.setContent {
             AsideTheme {
-                AsideScreen()
+                AsideScreen(onCreate = {})
             }
         }
 

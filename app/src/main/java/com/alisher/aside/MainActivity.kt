@@ -3,7 +3,6 @@ package com.alisher.aside
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import com.alisher.aside.ui.debug.SessionTestScreen
 import com.alisher.aside.ui.theme.*
 
 class MainActivity : ComponentActivity() {
@@ -11,7 +10,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             AsideTheme {
-                SessionTestScreen()
+                AsideApp()
             }
         }
     }
