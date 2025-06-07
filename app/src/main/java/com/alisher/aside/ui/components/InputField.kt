@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.Divider
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
@@ -39,19 +40,28 @@ fun InputField(
         keyboard?.show()
     }
 
-    Row(
+    Column(
         modifier = modifier
             .background(AsideTheme.colors.blackHole)
             // nav-bar inset first (old 3-button mode)
             .navigationBarsPadding()
             // IME inset second (keyboard + suggestion strip)
             .imePadding()
-            // tiny safety pad for OEM quirks
-            .padding(bottom = 8.dp)
-            .padding(horizontal = 16.dp)
-            .heightIn(min = 48.dp),
-        verticalAlignment = Alignment.Bottom
     ) {
+        Divider(
+            modifier = Modifier.fillMaxWidth(),
+            thickness = 1.dp,
+            color = AsideTheme.colors.grayGraphene
+        )
+
+        Row(
+            modifier = Modifier
+                // tiny safety pad for OEM quirks
+                .padding(bottom = 8.dp)
+                .padding(horizontal = 16.dp)
+                .heightIn(min = 48.dp),
+            verticalAlignment = Alignment.Bottom
+        ) {
         var internal by rememberSaveable(stateSaver = TextFieldValue.Saver) {
             mutableStateOf(TextFieldValue(text))
         }
@@ -94,4 +104,6 @@ fun InputField(
             modifier = Modifier.align(Alignment.Bottom)
         )
     }
+}
+
 }
