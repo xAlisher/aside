@@ -56,6 +56,7 @@ fun InputField(
 
         Row(
             modifier = Modifier
+                .padding(top = 16.dp)
                 // tiny safety pad for OEM quirks
                 .padding(bottom = 8.dp)
                 .padding(horizontal = 16.dp)
