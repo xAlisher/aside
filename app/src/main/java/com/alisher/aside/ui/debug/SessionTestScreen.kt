@@ -47,7 +47,6 @@ fun SessionTestScreen(viewModel: SessionViewModel = viewModel()) {
                 val fakeInvite = "Let’s step aside: ${System.currentTimeMillis().toString(16)}"
                 val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
                 clipboard.setPrimaryClip(ClipData.newPlainText("invite", fakeInvite))
-                showTopToast(context, "Invite copied to clipboard. Send it to your peer.")
             }) {
                 Text("Start Session")
             }
