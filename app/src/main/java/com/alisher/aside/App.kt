@@ -33,7 +33,8 @@ fun AsideApp() {
             peerState     = peerState,
             draft         = draft,
             onDraftChange = { draft = it },
-            onExit        = { screen = AppScreen.Home }
+            onExit        = { screen = AppScreen.Home },
+            messages      = emptyList()
         )
     }
 }

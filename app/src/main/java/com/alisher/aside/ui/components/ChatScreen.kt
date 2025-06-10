@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.ime
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -15,12 +16,20 @@ fun ChatScreen(
     peerState: PeerState,
     draft: String,
     onDraftChange: (String) -> Unit,
-    onExit: () -> Unit
+    onExit: () -> Unit,
+    messages: List<ChatMessage>,
+    listState: MessageListState = rememberMessageListState()
 ) {
     val keyboard = LocalSoftwareKeyboardController.current
 
     if (peerState == PeerState.Exited) {
         LaunchedEffect(peerState) { keyboard?.hide() }
+    }
+
+    LaunchedEffect(messages.size) {
+        if (listState.lazyListState.firstVisibleItemIndex == 0) {
+            listState.scrollToBottom()
+        }
     }
 
     Scaffold(
@@ -46,5 +55,11 @@ fun ChatScreen(
                 )
             }
         }
-    ) { /* messages go here later */ }
+    ) { padding ->
+        MessageList(
+            messages = messages,
+            state = listState,
+            modifier = Modifier.padding(padding)
+        )
+    }
 }

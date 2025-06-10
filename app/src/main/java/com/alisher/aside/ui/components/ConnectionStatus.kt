@@ -90,7 +90,7 @@ fun ConnectionStatus(
             text  = when (status) {
                 PeerState.Offline    -> "Peer is offline"
                 PeerState.Connecting -> "Connecting…"
-                PeerState.Connected  -> "Peer connected"
+                PeerState.Connected  -> "Peer is connected"
                 PeerState.Exited     -> "Peer exited"
             },
             color = textCol.copy(alpha = alpha.value),
