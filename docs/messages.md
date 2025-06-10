@@ -73,6 +73,15 @@ enum class MessageStatus { Queued, Sent, Delivered, Failed }
 
 ### 4 · Send logic
 
+- **Message creation**
+  - When user presses the button (Send or Queue), a new `Message(...)` must be created with:
+    - `type = MessageType.Out`
+    - `status = Queued` or `Sent` depending on `PeerState`
+    - `text = input text`
+  - Append it to the in-memory message list
+  - Scroll to bottom
+  - Clear input field
+
 - **Peer Offline or Connecting**
   - Button label = **Queue**.
   - Message stored in RAM with `MessageStatus.Queued`.
