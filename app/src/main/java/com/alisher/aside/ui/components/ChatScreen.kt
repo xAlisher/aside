@@ -16,6 +16,8 @@ fun ChatScreen(
     peerState: PeerState,
     draft: String,
     onDraftChange: (String) -> Unit,
+    onSend: () -> Unit,
+    onCycle: () -> Unit,
     onExit: () -> Unit,
     messages: List<ChatMessage>,
     listState: MessageListState = rememberMessageListState()
@@ -33,7 +35,13 @@ fun ChatScreen(
     }
 
     Scaffold(
-        topBar = { SessionTopBar(peerState, onExit) },
+        topBar = {
+            SessionTopBar(
+                peerState   = peerState,
+                onExit      = onExit,
+                onDebugCycle = onCycle
+            )
+        },
         bottomBar = {
             if (peerState != PeerState.Exited) {
                 val buttonType = when (peerState) {
@@ -47,6 +55,7 @@ fun ChatScreen(
                     text          = draft,
                     onValueChange = onDraftChange,
                     buttonType    = buttonType,
+                    onSend        = onSend,
                     modifier      = Modifier
                         // clears navigation-bar height (3-button mode)
                         .windowInsetsPadding(WindowInsets.navigationBars)

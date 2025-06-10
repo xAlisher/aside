@@ -23,6 +23,8 @@ fun ChatScreenPreview() {
                 peerState     = PeerState.Connected,
                 draft         = draft,
                 onDraftChange = { draft = it },
+                onSend        = {},
+                onCycle       = {},
                 onExit        = {},
                 messages      = messages
             )

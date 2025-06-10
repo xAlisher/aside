@@ -30,6 +30,7 @@ fun InputField(
     text: String,
     onValueChange: (String) -> Unit,
     buttonType: ButtonType = ButtonType.Send,
+    onSend: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     val keyboard   = LocalSoftwareKeyboardController.current
@@ -100,6 +101,7 @@ fun InputField(
                 type  = buttonType,
                 state = btnState,
                 onClick = {
+                    onSend()
                     onValueChange("")
                     internal = TextFieldValue("")
                 },

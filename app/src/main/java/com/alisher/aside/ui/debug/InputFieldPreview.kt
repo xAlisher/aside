@@ -21,11 +21,13 @@ fun InputFieldPreview() {
             InputField(
                 text = text1.value,
                 onValueChange = { text1.value = it },
+                onSend = {},
             )
 
             InputField(
                 text = text2.value,
                 onValueChange = { text2.value = it },
+                onSend = {},
             )
         }
     }
