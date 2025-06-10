@@ -10,6 +10,6 @@ import com.alisher.aside.ui.theme.AsideTheme
 @Composable
 fun SessionTopBarPreview() {
     AsideTheme {
-        SessionTopBar(peerState = PeerState.Offline, onExit = {}, onDebugCycle = {})
+        SessionTopBar(peerState = PeerState.Connected, onExit = {}, onDebugCycle = {})
     }
 }

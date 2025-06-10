@@ -9,7 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.alisher.aside.BuildConfig
+//import com.alisher.aside.BuildConfig
 
 /**
  * Top‑bar shown during an active session.
@@ -34,14 +34,19 @@ fun SessionTopBar(
             modifier = Modifier,
             contentAlignment = Alignment.Center
         ) {
-            if (BuildConfig.DEBUG) {
-                ConnectionStatus(
-                    status = peerState,
-                    modifier = Modifier.clickable { onDebugCycle() }
-                )
-            } else {
-                ConnectionStatus(peerState)
-            }
+            ConnectionStatus(
+                status = peerState,
+                modifier = Modifier.clickable { onDebugCycle() }
+            )
+
+//           if (BuildConfig.DEBUG) {
+//               ConnectionStatus(
+//                   status = peerState,
+//                   modifier = Modifier.clickable { onDebugCycle() }
+//                )
+//           } else {
+//             ConnectionStatus(peerState)
+//         }
         }
 
         Spacer(Modifier.weight(1f))

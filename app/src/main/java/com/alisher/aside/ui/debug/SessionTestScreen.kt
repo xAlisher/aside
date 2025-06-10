@@ -1,3 +1,4 @@
+/*
 package com.alisher.aside.ui.debug
 
 import android.content.ClipData
@@ -79,3 +80,4 @@ fun SessionTestScreen(viewModel: SessionViewModel = viewModel()) {
         }
     }
 }
+*/
